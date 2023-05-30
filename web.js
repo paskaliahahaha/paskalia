@@ -1,5 +1,6 @@
 const http = require('http');
 const url = require('url');
+const fs = require('fs');
 
 const server = http.createServer((req, res) => {
   const queryObject = url.parse(req.url, true).query;
@@ -12,8 +13,9 @@ const server = http.createServer((req, res) => {
   } else {
     const area = Math.PI * radius ** 2;
     res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end(`The area of a circle with radius ${radius} is ${area}.\n`);
+    res.setHeader('Content-Type', 'text/html');
+    const html = `<html><body><h1>The area of a circle with radius ${radius} is ${area}.</h1></body></html>`;
+    res.end(html);
   }
 });
 
